@@ -1,0 +1,5 @@
+fiona==1.10.1
+sqlalchemy==1.4.36
+pandas==2.1.2
+geopandas==1.1.1
+geoalchemy2==0.18.0
