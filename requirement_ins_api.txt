@@ -1,5 +1,8 @@
 fiona==1.10.1
+psycopg2==2.9.11
+psycopg2-binary==2.9.11
 sqlalchemy==1.4.36
 pandas==2.1.2
 geopandas==1.1.1
 geoalchemy2==0.18.0
+urllib3==2.5.0
