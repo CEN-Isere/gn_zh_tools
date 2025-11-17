@@ -614,13 +614,20 @@ def insert_zh_fromapi(
         tuple(api.code.dropna()),
         con
     )
+        
+    nzh_tobdd = api[
+        (api.action=='Créer')&
+        (~api.code.isin(zh_filter.code.tolist()))
+    ].shape[0]
     print("L'api contient %s zones .."%api.shape[0])
     print("%s zones sont taguée `Problème` .."%api[api.action=='Problème'].shape[0])
     print("%s zones taguée `Créer` existent déjà .."%zh_filter.shape[0])
-    print("%s zones taguée `Créer` sont à intégrer .."%api[
-        (api.action=='Créer')&
-        (~api.code.isin(zh_filter.code.tolist()))
-    ].shape[0])
+    print("%s zones taguée `Créer` sont à intégrer .."%nzh_tobdd)
+
+    if nzh_tobdd == 0 :
+        print("\nAucune nouvelles zones humides sont à intégrée ..")
+        print("Arrêt du script !")
+        return None
 
     Q = input('Souhaitez-vous continuer ? (Y/n) : ')
     if Q.lower() != 'y':
