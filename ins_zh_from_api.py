@@ -614,7 +614,7 @@ def insert_zh_fromapi(
         tuple(api.code.dropna()),
         con
     )
-        
+
     nzh_tobdd = api[
         (api.action=='Créer')&
         (~api.code.isin(zh_filter.code.tolist()))
@@ -640,6 +640,7 @@ def insert_zh_fromapi(
         ].rename_geometry('geom')
         # .merge(load_missing_propertie(url,'cd_nomenclature_delimitation',dep_filter), on='pk')
     )
+
     df.observateur = normalize_observers(df.observateur)
     users, id_org  = insert_users_missing(df.observateur,orga,con)
     df['id_org'] = id_org
@@ -689,11 +690,11 @@ def insert_zh_fromapi(
     u = _df[_df.action=="Modifier"].copy()
 
     if not c.empty:
-        # return c
-        id_zh = to_tzh(c,con,lst_area)
-        to_cor_zh_cb(id_zh,c,con)
-        to_cor_lim_list(c[['id_lim_list','cd_nomenclature_delimitation']],con)
-        to_t_activity(id_zh,c[['code','acti_impact']],con)
+        return c
+        # id_zh = to_tzh(c,con,lst_area)
+        # to_cor_zh_cb(id_zh,c,con)
+        # to_cor_lim_list(c[['id_lim_list','cd_nomenclature_delimitation']],con)
+        # to_t_activity(id_zh,c[['code','acti_impact']],con)
     if not u.empty:
         raise('Script à coder !')
 
@@ -766,3 +767,4 @@ if __name__ == "__main__":
         prefix_hab_rq=prefix_hab_rmk,
         code_rename=code_rename
     )
+    
